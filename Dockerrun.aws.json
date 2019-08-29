@@ -1,0 +1,35 @@
+{
+	"AWSEBDockerrunVeriosn": 2,
+	"containerDefinitions": [{
+			"name": "client",
+			"image": "arukulka/multi-client",
+			"hostname": "client",
+			"essential": false
+		},
+		{
+			"name": "server",
+			"image": "arukulka/multi-server",
+			"hostname": "api",
+			"essential": false
+		},
+		{
+			"name": "worker",
+			"image": "arukulka/multi-worker",
+			"hostname": "worker",
+			"essential": false
+		},
+		{
+			"name": "nginx",
+			"image": "arukulka/multi-nginx",
+			"hostname": "nginx",
+			"essential": true,
+			"portMappings": [{
+				"hostport": 80,
+				"containerPort": 80
+			}],
+			"links": ["client", "server"]
+		}
+
+	]
+}
+
